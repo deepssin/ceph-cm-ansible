@@ -1,4 +1,15 @@
 ---
+- name: Ensure LVM is installed
+  package:
+    name: lvm2
+    state: present
+
+- name: Ensure /etc/lvm directory exists
+  file:
+    path: /etc/lvm
+    state: directory
+    mode: '0755'
+
 - name: Edit lvm.conf to support LVM on kRBD.
   lineinfile:
     dest: /etc/lvm/lvm.conf
@@ -6,6 +17,7 @@
     line: 'types = [ "rbd", 16 ]'
     backrefs: yes
     state: present
+    create: yes
 
 - import_tasks: configure_lvm.yml
   when: (logical_volumes is defined) or
