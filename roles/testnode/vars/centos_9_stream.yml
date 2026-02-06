@@ -63,6 +63,8 @@ packages:
   - lvm2
   - net-tools
   - fuse
+  # for perl test harness
+  - perl-Test-Harness
 
 epel_packages:
   - dbench
